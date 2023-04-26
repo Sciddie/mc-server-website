@@ -7,5 +7,3 @@ createApp(App)
     .use(router)
     .mount('#app')
 
-
-/* Sidebar Javascript*/
