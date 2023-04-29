@@ -14,7 +14,7 @@
       <hr class="my-2 bg-gray-600 border-none h-[2px]">
     </div>
 
-    <div v-if="this.$route.meta.requiresAuth">
+    <div v-if="requiresAuth">
       <router-link to="/dashboard" class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white">
         <i class="bi bi-house-door-fill"></i>
         <span class="text-[15px] ml-4 text-gray-200">Dashboard</span>
@@ -90,9 +90,18 @@ async function logout() {
 </script>
 
 <script>
+import router from '../router/index.js'
 export default {
   name: "Sidebar",
+  data() {
+    return {
+      requiresAuth: false
+    }
+  },
   mounted() {
+    router.afterEach(() => {
+      this.requiresAuth = router.currentRoute.value.meta.requiresAuth;
+    })
   },
   methods: {
     sidebar_settings_dropdown(){
